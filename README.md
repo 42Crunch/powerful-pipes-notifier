@@ -1,1 +1,0 @@
-# powerful-pipes-notifier
