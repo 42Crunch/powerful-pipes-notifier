@@ -2,11 +2,11 @@
 Powerful Pipes Notifier - Multi-Channel notification tool with the power of UNIX Pipes
 ********************************************************************************************
 
-[License](https://img.shields.io/badge/License-Apache2-SUCCESS)
-[Pypi](https://img.shields.io/pypi/v/powerful-pipes-notifier)
-[Python Versions](https://img.shields.io/badge/Python-3.8%20%7C%203.9%20%7C%203.10-blue)
+![License](https://img.shields.io/badge/License-Apache2-SUCCESS)
+![Pypi](https://img.shields.io/pypi/v/powerful-pipes-notifier)
+![Python Versions](https://img.shields.io/badge/Python-3.8%20%7C%203.9%20%7C%203.10-blue)
 
-[Logo](https://raw.githubusercontent.com/42Crunch/powerful-pipes-notifier/main/docs/logo-250x250.png)
+![Logo](https://raw.githubusercontent.com/42Crunch/powerful-pipes-notifier/main/docs/logo-250x250.png)
 
 In a nutshell ``Powerful Pipes Notifier`` is a notification tool to forward STDIN data to different destinations.
 
