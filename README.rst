@@ -1,5 +1,5 @@
 *****************************************************************************
-Powerful Pipes - The power of UNIX Pipes
+Powerful Pipes Notifier - Multi-Channel notification tool with the power of UNIX Pipes
 *****************************************************************************
 
 .. image:: https://img.shields.io/badge/License-Apache2-SUCCESS
