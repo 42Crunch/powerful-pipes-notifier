@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from .mongodb import MongoDBNotifier
 from .webhook import WebhookNotifier, WebSocketNotifier
 from .interface import NotifierInterface
 from ..exceptions import NotifierException
@@ -14,6 +15,9 @@ async def connect_destination(
 
     elif config.destination_uri.startswith("ws"):
         return await WebSocketNotifier.open(config)
+
+    elif config.destination_uri.startswith("mongo"):
+        return await MongoDBNotifier.open(config)
 
     else:
         raise NotifierException("Invalid destination URI")

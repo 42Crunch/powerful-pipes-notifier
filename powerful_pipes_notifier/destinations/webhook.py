@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import abc
 import asyncio
 
 import aiohttp as aiohttp
@@ -10,7 +9,6 @@ from powerful_pipes import async_report_exception
 
 from ..config import RunningConfig
 from .interface import NotifierInterface
-from ..exceptions import NotifierDeliveryException
 
 
 class HTTPNotifier(NotifierInterface):
@@ -23,23 +21,9 @@ class HTTPNotifier(NotifierInterface):
         self.webhook_url = config.destination_uri
         self.max_concurrency = config.max_concurrency
 
-        self._queue = asyncio.Queue()
-
-        # Start consumer
-        self.tasks.append(
-            asyncio.create_task(self.consumer())
-        )
-
     @classmethod
     async def open(cls, config: RunningConfig) -> NotifierInterface:
         return cls(config)
-
-    async def notify(self, message: dict) -> None or NotifierDeliveryException:
-        await self._queue.put(message)
-
-    @abc.abstractmethod
-    async def consumer(self):
-        ...
 
 
 class WebhookNotifier(HTTPNotifier):
@@ -50,12 +34,12 @@ class WebhookNotifier(HTTPNotifier):
 
         while True:
             # Get a "work item" out of the queue.
-            message = await self._queue.get()
+            message = await self.queue.get()
 
             await sem.acquire()
 
             self.tasks.append(asyncio.create_task(
-                self._notify_webhook_(message, sem, self._queue)
+                self._notify_webhook_(message, sem, self.queue)
             ))
 
 
@@ -133,7 +117,7 @@ class WebSocketNotifier(HTTPNotifier):
                 async with session.ws_connect(self.webhook_url) as ws:
                     while True:
                         # Get a "work item" out of the queue.
-                        data = await self._queue.get()
+                        data = await self.queue.get()
 
                         await ws.send_json(data)
 

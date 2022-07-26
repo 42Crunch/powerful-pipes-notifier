@@ -38,8 +38,18 @@ Examples:
 
 Currently, these are the implemented schemas:
 
-- http:// -> webhook
-- ws:// -> websocket
+- http://URI -> webhook
+- ws://URI -> websocket
+- mongodb://user:password@host:port/?db=DATABASE&collection=COLLECTION 
+
+### MongoDB examples
+
+```bash
+> docker-compose -f docker-compose.mongo.yaml up -d
+> cat examples/localhost_meta.txt | notifier -d "mongodb://root:example@127.0.0.1:27900/?db=notifier&collection=logs" 
+```
+
+> NOTE: Pay attention of symbol "?" in the URI after the port slash.
 
 # Rules engine
 
